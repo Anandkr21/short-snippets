@@ -1,0 +1,4 @@
+URL: www.facebook.com | Address :2a03:2880:f16b:81:face:b00c:0:25de | IPv6
+URL: www.instagram.com | Address :2a03:2880:f26b:e6:face:b00c:0:4420 | IPv6
+URL: www.wix.com | Address :35.244.22.27 | IPv4
+URL: www.masaischool.com | Address :3.109.116.122 | IPv4
