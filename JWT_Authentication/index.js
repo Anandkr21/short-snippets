@@ -2,6 +2,7 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const { connection } = require('./configs/db')
 const { UserModel } = require('./model/user.model')
+require('dotenv').config()
 
 
 const app = express()
@@ -67,12 +68,12 @@ app.get('/about', (req, res) => {
     res.send('about page')
 })
 
-app.listen(8080, async () => {
+app.listen(process.env.port, async () => {
     try {
         await connection
         console.log('Connected to DB');
     } catch (error) {
         console.log(error);
     }
-    console.log("Server is running at port http://localhost:8080")
+    console.log(`Server is running at port ${process.env.port}`)
 })
