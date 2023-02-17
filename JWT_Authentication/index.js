@@ -21,9 +21,20 @@ app.post('/register', async(req,res) =>{
     }
 })
 
-app.post('/login', (req,res) =>{
-    res.send({"msg":"Log In Successfull"})
+app.post('/login', async(req,res) =>{
+    const {email,pass}=req.body
+    try {
+        const user=await UserModel.find({email,pass})
+        if(user.length>0){
+            res.send({"msg":"LogIn Successfull !"})
+        }else{
+            res.send({"msg":"Wrong Credentials"})
+        }
+    } catch (err) {
+        res.send({"msg":"Something went wrong", "error":err.message})
+    }
 })
+
 
 app.listen(8080, async()=>{
     try {

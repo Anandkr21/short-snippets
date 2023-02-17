@@ -1,9 +1,9 @@
 const mongoose=require('mongoose')
 
 const userSchema=mongoose.Schema({
-    name:String,
-    email:String,
-    pass:String
+    name:{type:"String", required:true},
+    email:{type:"String", required:true},
+    pass:{type:"String", required:true}
 })
 
 const UserModel=mongoose.model('practice', userSchema)
