@@ -1,0 +1,26 @@
+{
+  "students": [
+    {
+      "name": "anand",
+      "city": "chapra"
+    },
+    {
+      "name": "chunnu",
+      "city": "cpr"
+    }
+  ],
+  "teachers": [
+    {
+      "name": "pulkit",
+      "course": "coding"
+    },
+    {
+      "name": "venu",
+      "course": "dsa"
+    },
+    {
+      "name": "harshal",
+      "course": "csbt"
+    }
+  ]
+}
