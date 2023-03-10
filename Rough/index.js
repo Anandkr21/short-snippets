@@ -1,4 +1,5 @@
 // some short snippet for signup
+const fs = require('fs');
 
 const signupUser=async(req,res) =>{
     try {
@@ -25,10 +26,49 @@ module.exports = {signupUser}
 
 
 
+// some short snippet for Login
+const LoginUser = async (req,res) =>{
+    try {
+        const { email, password } = req.body;
+        const isUserPresent = await User.findOne({email});
+
+        if(!isUserPresent){
+            return res.send("User not present, register please.")
+        }
+        const isPasswordCorrect = await bcrypt.compareSync(
+            password,
+            isUserPresent.password
+        );
+        if(!isPasswordCorrect){
+            return res.send("Invalid credentials");
+        }
+        const token = await jwt.sign(
+            { email, userId: isUserPresent._id, role: isUserPresent.role},
+            "authsecret",
+            { expiresIn: " 10m "}
+        );
+        const refreshToken = await jwt.sign(
+            {email, userId: isUserPresent._id },
+            "refreshtokensecret",
+            { expiresIn: "1h" }
+        );
+        res.send({ msg: "Login successfully.", token, refreshToken});
+    } catch (error) {
+        res.send(error.message);
+    }
+};
+
+module.exports = { LoginUser }
+
+
+
+
 
 
 // Authentication goes here 
+
 const jwt = require("jsonwebtoken");
+const { isPromise } = require('util/types');
 
 const authentication = async(req, res, next) =>{
     try {
@@ -54,4 +94,6 @@ const authentication = async(req, res, next) =>{
 };
 
 module.exports = { authentication }
+
+
 
