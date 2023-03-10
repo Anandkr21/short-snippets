@@ -39,9 +39,11 @@ const LoginUser = async (req,res) =>{
             password,
             isUserPresent.password
         );
+
         if(!isPasswordCorrect){
             return res.send("Invalid credentials");
         }
+
         const token = await jwt.sign(
             { email, userId: isUserPresent._id, role: isUserPresent.role},
             "authsecret",
@@ -52,6 +54,7 @@ const LoginUser = async (req,res) =>{
             "refreshtokensecret",
             { expiresIn: "1h" }
         );
+        
         res.send({ msg: "Login successfully.", token, refreshToken});
     } catch (error) {
         res.send(error.message);
