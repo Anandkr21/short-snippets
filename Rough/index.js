@@ -21,3 +21,37 @@ const signupUser=async(req,res) =>{
 }
 
 module.exports = {signupUser}
+
+
+
+
+
+
+// Authentication goes here 
+const jwt = require("jsonwebtoken");
+
+const authentication = async(req, res, next) =>{
+    try {
+        const token = req?.headers?.authorization.split(' ')[1];
+        if(!token){
+            res.status(401).send({msg: "Please login again."});
+            // throw new Error("Please login again."); 
+        }
+        const isTokenValid = await jwt.verify(token, "authsecret");
+        if(!isTokenValid){
+            return res
+            .status(403)
+            .send({msg: "Authentication failed, please login agian."});
+        }
+
+        req.body.userId = isTokenValid.userId;
+        req.body.email = isTokenValid.email;
+        req.body.role = isTokenValid.role;
+        next();
+    } catch (error) {
+        res.send({msg: "Please login.", err: error.message });
+    }
+};
+
+module.exports = { authentication }
+
