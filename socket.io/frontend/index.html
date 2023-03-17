@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <form id="score-form" >
+        <h1>Enter Score</h1>
+        <div id="show-msg"></div>
+        <div>
+            <label for="con1">Enter 1st countery</label>
+            <input type="text " id="con1" required>
+        </div>
+        <div>
+            <label for="con2">Enter 2nd countery</label>
+            <input type="text " id="con2" required>
+        </div>
+        <div>
+            <label for="livescore">Enter score</label>
+            <input type="number" id="livescore" required>
+        </div>
+        <div>
+            <label for="wickets">Enter wicket</label>
+            <input type="number" id="wickets" required>
+        </div>
+        <div>
+            <label for="overs">Enter over</label>
+            <input type="number" id="overs" required>
+        </div>
+        <button type="submit">submit</button>
+    </form>
+
+
+
+
+    <form id="more-details">
+        <div id="show-more"></div>
+        <h1>enter details of match</h1>
+        <div>
+            <label for="batsman1"> batsman1</label>
+            <input type="text " id="bat1"  required>
+        </div>
+        <div>
+            <label for="batsman2"> batsman2</label>
+            <input type="text " id="bat2"  required>
+        </div>
+        <div>
+            <label for="bowler"> bowler</label>
+            <input type="text " id="bowler"  required>
+        </div>
+        <button type="sub">update</button>
+    </form>
+
+
+
+</body>
+<script src="https://cdn.socket.io/4.6.0/socket.io.min.js" integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+" crossorigin="anonymous"></script>
+<script src="./index.js"></script>
+</html>
