@@ -1,22 +1,32 @@
-You are tasked with building a backend application using Node.js, MongoDB, and Redis to manage stock data. Specifically, the application should satisfy the following requirements:
+You are tasked with building a backend application using Node.js, MongoDB, and Redis to manage stock data. Specifically, the application should satisfy the following
+requirements:
 
-Companies API: The application should provide an endpoint for creating, reading, updating, and deleting companies. Each company should have a name and a symbol.
+Companies API: The application should provide an endpoint for creating, reading, updating, and deleting companies. Each company should have
+ a name and a symbol.
 
-Orders API: The application should provide an endpoint for creating, reading, and deleting orders. Each order should include the name of the company it is associated with, the price of the order, and the time the order was placed.
+Orders API: The application should provide an endpoint for creating, reading, and deleting orders. Each order should include the name of the
+ company it is associated with, the price of the order, and the 
+ time the order was placed.
 
-Stats API: The application should provide an endpoint for retrieving statistics about a particular company's orders. When a user makes a request to /company/:symbol/stats/, the application should calculate and return the maximum order price, minimum order price, as well as number of orders made for the day. This data should be cached in Redis to speed up future requests. The data will be invalidated everytime a new order for that company is made. It will also have an expiry of 1 day otherwise.
+Stats API: The application should provide an endpoint for retrieving statistics about a particular company's orders. When a user makes a request 
+to /company/:symbol/stats/, the application should calculate and return the maximum order price, minimum order price, as well as number 
+of orders made for the day. This data should be cached in Redis to speed up future requests. The data will be invalidated everytime a new 
+order for that company is made. It will also have an expiry of 1 day otherwise.
 
 Caching: The application should use Redis as a cache to store the stats for each company.
 
-Logging: The application should be set up using PM2, and should log each API request that is made, including the IP address, time, and details of the request. Maintain info of redis updates as well on it
+Logging: The application should be set up using PM2, and should log each API request that is made, including the IP address, time, and details of the request. 
+Maintain info of redis updates as well on it
 
 To accomplish these requirements, you should create the following components:
 
-A Node.js application that serves as the backend for the stock management system. The application should include separate endpoints for managing companies, orders, and retrieving statistics about orders for a particular company.
+A Node.js application that serves as the backend for the stock management system. The application should include separate endpoints for managing companies, 
+orders, and retrieving statistics about orders for a particular company.
 
 A MongoDB database that stores information about each company and each order.
 
-A Redis cache that stores the data of stats on it. you dont need to calculate the data for the current day
+A Redis cache that stores the data of stats on it. you dont need to 
+calculate the data for the current day
 
 
 
