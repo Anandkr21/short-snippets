@@ -61,7 +61,9 @@ Orders Collection:
 
 
 
-In this schema, each document in the Companies collection represents a single company, and includes information about the company's name and stock ticker symbol. Each document in the Orders collection represents a single order, and includes information about the company the order is associated with, the price of the order, and the time the order was placed.
+In this schema, each document in the Companies collection represents a single company, and includes information about the company's name and stock ticker symbol. 
+Each document in the Orders collection represents a single order, and includes information about the company the order is associated with, 
+the price of the order, and the time the order was placed.
 
 
 
