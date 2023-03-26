@@ -1,0 +1,268 @@
+You are tasked with building a backend application using Node.js, MongoDB, and Redis to manage stock data. Specifically, the application should satisfy the following requirements:
+
+Companies API: The application should provide an endpoint for creating, reading, updating, and deleting companies. Each company should have a name and a symbol.
+
+Orders API: The application should provide an endpoint for creating, reading, and deleting orders. Each order should include the name of the company it is associated with, the price of the order, and the time the order was placed.
+
+Stats API: The application should provide an endpoint for retrieving statistics about a particular company's orders. When a user makes a request to /company/:symbol/stats/, the application should calculate and return the maximum order price, minimum order price, as well as number of orders made for the day. This data should be cached in Redis to speed up future requests. The data will be invalidated everytime a new order for that company is made. It will also have an expiry of 1 day otherwise.
+
+Caching: The application should use Redis as a cache to store the stats for each company.
+
+Logging: The application should be set up using PM2, and should log each API request that is made, including the IP address, time, and details of the request. Maintain info of redis updates as well on it
+
+To accomplish these requirements, you should create the following components:
+
+A Node.js application that serves as the backend for the stock management system. The application should include separate endpoints for managing companies, orders, and retrieving statistics about orders for a particular company.
+
+A MongoDB database that stores information about each company and each order.
+
+A Redis cache that stores the data of stats on it. you dont need to calculate the data for the current day
+
+
+
+Here is an example schema for the MongoDB collections:
+Companies Collection:
+
+
+
+{
+
+   "name": String,
+
+symbol": String
+
+   "}
+
+
+
+
+
+
+Orders Collection:
+
+
+{
+
+   "company_symbol": String,
+
+   "price": Decimal,
+
+   "time": Date
+
+}
+
+
+
+In this schema, each document in the Companies collection represents a single company, and includes information about the company's name and stock ticker symbol. Each document in the Orders collection represents a single order, and includes information about the company the order is associated with, the price of the order, and the time the order was placed.
+
+
+
+
+Example data
+
+Companies Collection:
+
+
+{
+
+   "name": "Apple",
+
+   "symbol": "AAPL"
+
+}
+
+{
+
+   "name": "Microsoft",
+
+   "symbol": "MSFT"
+
+}
+
+{
+
+   "name": "Google",
+
+   "symbol": "GOOG"
+
+}
+
+{
+
+   "name": "Amazon",
+
+   "symbol": "AMZN"
+
+}
+
+{
+
+   "name": "Facebook",
+
+   "symbol": "FB"
+
+}
+
+
+
+Orders Collection:
+{
+
+   "company_symbol": "AAPL",
+
+   "price": 123.45,
+
+   "time": ISODate("2022-01-01T01:23:45Z")
+
+}
+
+{
+
+   "company_symbol": "AAPL",
+
+   "price": 124.56,
+
+   "time": ISODate("2022-01-01T01:24:56Z")
+
+}
+
+{
+
+   "company_symbol": "AAPL",
+
+   "price": 125.67,
+
+   "time": ISODate("2022-01-01T01:25:67Z")
+
+}
+
+{
+
+   "company_symbol": "AAPL",
+
+   "price": 126.78,
+
+   "time": ISODate("2022-01-01T01:26:78Z")
+
+}
+
+{
+
+   "company_symbol": "AAPL",
+
+   "price": 127.89,
+
+   "time": ISODate("2022-01-01T01:27:89Z")
+
+}
+
+{
+
+   "company_symbol": "MSFT",
+
+   "price": 234.56,
+
+   "time": ISODate("2022-01-01T02:34:56Z")
+
+}
+
+{
+
+   "company_symbol": "MSFT",
+
+   "price": 235.67,
+
+   "time": ISODate("2022-01-01T02:35:67Z")
+
+}
+
+{
+
+   "company_symbol": "MSFT",
+
+   "price": 236.78,
+
+   "time": ISODate("2022-01-01T02:36:78Z")
+
+}
+
+{
+
+   "company_symbol": "MSFT",
+
+   "price": 237.89,
+
+   "time": ISODate("2022-01-01T02:37:89Z")
+
+}
+
+{
+
+   "company_symbol": "MSFT",
+
+   "price": 238.90,
+
+   "time": ISODate("2022-01-01T02:38:90Z")
+
+}
+
+{
+
+   "company_symbol": "GOOG",
+
+   "price": 345.67,
+
+   "time": ISODate("2022-01-01T03:45:67Z")
+
+}
+
+{
+
+   "company_symbol": "GOOG",
+
+   "price": 346.78,
+
+   "time": ISODate("2022-01-01T03:46:78Z")
+
+}
+
+{
+
+   "company_symbol": "GOOG",
+
+   "price": 347.89,
+
+   "time": ISODate("2022-01-01T03:47:89Z")
+
+}
+
+{
+
+   "company_symbol": "GOOG",
+
+   "price": 348.90,
+
+   "time": ISODate("2022-01-01T03:48:90Z")
+
+}
+
+{
+
+   "company_symbol": "GOOG",
+
+   "price": 349.01,
+
+   "time": ISODate("2022-01-01T03:49:01Z")
+
+}
+
+{
+
+   "company_symbol": "AMZN",
+
+   "price": 456.78,
+
+   "time": ISODate("2022-01-01T04:56:78Z")
+
+}
+
