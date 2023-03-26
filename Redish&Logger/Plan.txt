@@ -39,8 +39,6 @@ symbol": String
 
 
 Orders Collection:
-
-
 {
 
    "company_symbol": String,
@@ -59,7 +57,6 @@ In this schema, each document in the Companies collection represents a single co
 
 
 Example data
-
 Companies Collection:
 
 
